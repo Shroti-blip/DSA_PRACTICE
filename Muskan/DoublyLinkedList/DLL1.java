@@ -15,20 +15,20 @@ public class DLL1 {
 
     static class DLinkedList{
         Node head;
+        Node tail;
         void insertAtEnd(int data){
             Node node = new Node(data);
-            Node temp=head;
+
             if(head==null){
-                head=node;
-                head.next=null;
+                head=tail=node;
+                tail.next=null;
                 return;
             }
-            while (temp.next!=null){
-                temp=temp.next;
-            }
-            node.prev=temp;
-            temp.next=node;
 
+            node.prev=tail;
+            tail.next=node;
+            tail=node;
+            
         }
 
         void displayForward(){
@@ -40,14 +40,9 @@ public class DLL1 {
             System.out.println("null");
         }
 
-        void displayBackward(){//not printing head node (BUG)
-            Node temp=head;
-            while(temp.next!=null){
-                temp=temp.next;
-
-            }
-
-            while(temp!=head){
+        void displayBackward(){
+            Node temp=tail;
+            while(temp!=null){
                 System.out.print(temp.data+"<->");
                 temp=temp.prev;
             }
