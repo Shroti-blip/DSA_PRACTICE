@@ -40,7 +40,7 @@ public class DLL1 {
             System.out.println("null");
         }
 
-        void displayBackward(){
+        void displayBackward(){//not printing head node (BUG)
             Node temp=head;
             while(temp.next!=null){
                 temp=temp.next;
