@@ -39,6 +39,20 @@ public class ReverseLL {
 
         void reverse(){
             System.out.println("Reverse LL");
+            Node curr=head;
+            Node prev=null;
+            Node next=curr.next;
+            while (curr!=null){
+                curr.next=prev;//first link break;
+                curr=next;
+                next=curr.next;
+                prev=curr;
+            }
+//            while(curr!=null){
+//                System.out.print(curr.data+"->");
+//                curr=curr.next;
+//            }
+//            System.out.println("null");
         }
     }
 
@@ -50,7 +64,8 @@ public class ReverseLL {
             System.out.println("Enter your choice");
             System.out.println("1.Add at end");
             System.out.println("2.Display");
-            System.out.println("3.Exit");
+            System.out.println("3.Reverse");
+            System.out.println("4.Exit");
 
             int choice = sc.nextInt();
             switch (choice){
@@ -62,7 +77,11 @@ public class ReverseLL {
                 case 2 :
                     list.disPlay();
                     break;
-                case 3:
+                case 3 :
+                    list.reverse();
+                    list.disPlay();
+                    break;
+                case 4:
                     System.exit(0);
                     break;
                 default:
