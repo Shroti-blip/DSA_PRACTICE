@@ -3,7 +3,7 @@ package org.example.day14;
 public class CircularQueueArray {
 
     private static java.util.Scanner sc=new java.util.Scanner(System.in);
-    private static final int MAX_SIZE=10;
+    private static final int MAX_SIZE=5;
     private static int front=-1,rear=-1;
     private static int [] queue=new int[MAX_SIZE];
 
@@ -12,11 +12,19 @@ public class CircularQueueArray {
             System.out.println("Queue is Overflow!");
             return;
         }
-        if((rear+1)>=MAX_SIZE || rear<front){
-            if((rear+1)>=MAX_SIZE)
-                rear=0;
-            queue[rear++]=data;
-            return;
+        if((rear+1)>=MAX_SIZE){
+            System.out.println("Inside the After Popup insert if");
+            for(int i=front;i>-1;i--){
+                if(rear==i){
+                    queue[++rear]=data;
+                    return;
+                }
+                if(i==0){
+                    queue[i]=data;
+                    rear=i;
+                    return;
+                }
+            }
         }
         if(front==-1){
             queue[++front]=data;
@@ -33,24 +41,37 @@ public class CircularQueueArray {
             return;
         }
         front++;
+        if(front==MAX_SIZE)
+            front=0;
         if(front==rear+1){
             front=rear=-1;
         }
         System.out.println("Value Deleted!");
     }
 
+    public static void print(int i){
+        if(i==front)
+            System.out.print(queue[i]+"(FRONT["+i+"]) ==> ");
+        else if(i==rear)
+            System.out.print(queue[i]+"(REAR["+i+"]) ==> ");
+        else
+            System.out.print(queue[i]+" ==> ");    }
+
     public static void display(){
         if(front==-1){
             System.out.println("Queue is Underflow!");
             return;
         }
-        for(int i=front;i<=rear;i++){
-            if(i==front)
-                System.out.print(queue[i]+"(FRONT["+i+"]) ==> ");
-            else if(i==rear)
-                System.out.print(queue[i]+"(REAR["+i+"]) ==> ");
-            else
-                System.out.print(queue[i]+" ==> ");
+        if((rear+1)%MAX_SIZE==front){
+            for(int i=0;i<MAX_SIZE;i++){
+                print(i);
+            }
+            return;
+        }
+        for(int i=front;i!=rear+1;i++){
+            if(i==MAX_SIZE)
+                i=0;
+            print(i);
         }
         System.out.println();
     }
